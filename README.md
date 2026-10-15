@@ -1,39 +1,26 @@
-# PSI-Microcontroladores2-Aula01
+----
+Atividade baremetal: um led com ciclo de 1 segundo e outro com ciclo de 500ms.
 
-Atividade prática inicial da aula 1 da disciplina Microcontroladores 2 (PSI).
+Leds utilizados: verde e azul.
 
-Registre sua evolução utilizando os checklists abaixo por meio de commits com mensagens descritivas:
+Lógica de programação: Configurar um delay fixo de 500ms e criar um looping na função em que esse delay ocorra duas vezes: na primeira apenas o led azul alterna de estado (liga/desliga), e na segunda ambos os leds alternam de estado.
 
-### Setup (individual)
-- [ ] Possuo VSCode instalado
-- [ ] Possuo MCUXpresso instalado
-- [ ] Possuo PlatformIO instalado
-- [ ] Possuo cabo USB compatível com Placa Freedom
-- [ ] Possuo Placa Freedom operacional
-- [ ] Possuo Zephyr atualizado para versão 4.2
+Resultados esperados: O led da placa fica em um ciclo em que, primeiro, por 500ms ambos os leds ficam acesos (led da placa fica cor turquesa), depois, por 500ms  apenas o led verde (led da placa fica cor verde), depois, por 500ms apenas o led azul (led da placa fica cor azul), e, por fim, por 500ms ambos os leds ficam apagados. Isso ocorrerá porque a duração dos ciclos dos leds é diferente, e esses serão executados paralelamente.
 
-Materiais para consulta: https://frdm-kl25z-com-zephyr-rtos.super.site/instalao, https://frdm-kl25z-com-zephyr-rtos.super.site/tutoriais/1-exemplo-pisca-led-rtos/atualizao-para-o-zephyr-42
+Resultados obtidos: Foram coerentes com o programado.
 
-### Atividade Baremetal (implementação individual, validação em dupla)
-- [ ] Crie uma branch chamada baremetal
-- [ ] Compile e execute o exemplo de piscar led baremetal na placa Freedom com o Zephyr versão 4.2 (vide [https://frdm-kl25z-com-zephyr-rtos.super.site/tutoriais/2-pisca-led-simples](https://frdm-kl25z-com-zephyr-rtos.super.site/tutoriais/1-exemplo-pisca-led-rtos/atualizao-para-o-zephyr-42)). Dica: Utilize por enquanto somente o led da placa
-- [ ] Faça alterações no código para controlar dois leds: um led deve piscar a cada segundo, e o segundo led deve piscar a cada meio segundo
-- [ ] Desafio: tente fazer com que o primeiro led pisque a cada segundo, e o segundo led pisque a cada 350 ms
-- [ ] Crie um planejamento de testes para verificação do correto funcionamento, detalhando quais são os resultados esperados
-- [ ] Abra uma Pull Request
-- [ ] Seu par irá avaliar a Pull Request: adicionar sugestões em issues ou na discussão do PR (ATENÇÃO: o par deve tentar executar os testes propostos, e mesmo em caso de tudo funcionar, registrar em comentários como a validação foi realizada)
-- [ ] Após as pendências serem resolvidas, seu par irá validar as melhorias e aceitar a PR
+----
 
-### Atividade Threads (implementação individual, validação em dupla)
-- [ ] Crie uma branch chamada threads
-- [ ] Compile e execute o exemplo de piscar led com threads na placa Freedom (vide [https://github.com/platformio/platform-freescalekinetis/blob/develop/examples/zephyr-blink/src/main.c e https://frdm-kl25z-com-zephyr-rtos.super.site/tutoriais/1-exemplo-pisca-led-rtos](https://frdm-kl25z-com-zephyr-rtos.super.site/tutoriais/threads-zephyr-42))
-- [ ] Faça alterações no código para controlar dois leds: um led deve piscar a cada segundo, e o segundo led deve piscar a cada meio segundo
-- [ ] Desafio: tente fazer com que o primeiro led pisque a cada segundo, e o segundo led pisque a cada 350 ms
-- [ ] Crie um planejamento de testes para verificação do correto funcionamento, detalhando quais são os resultados esperados
-- [ ] Abra uma Pull Request
-- [ ] Seu par irá avaliar a Pull Request: adicionar sugestões em issues ou na discussão do PR (ATENÇÃO: o par deve tentar executar os testes propostos, e mesmo em caso de tudo funcionar, registrar em comentários como a validação foi realizada)
-- [ ] Após as pendências serem resolvidas, seu par irá validar as melhorias e aceitar a PR
+Atividade baremetal (desafio): um led com ciclo de 1 segundo e outro com ciclo de 350ms.
 
-### Desafio (individual)
-- [ ] Explore recursos de debug e faça um arquivo markdown mostrando como estes recursos podem ser úteis na identificação e correção de problemas
-- [ ] Reflita e responda em seu arquivo markdown: qual a diferença entre os recursos de debug e testes? São abordagens complementares?
+Leds utilizados: verde e azul.
+
+Lógica de programação: Configurar um delay de 50 ms, criar um looping que repete ele infinitamente e variáveis de inteiros “i” e “j” que armazenam valores de quantas vezes esse delay ocorre, aumentando em 1 a cada repetição, de modo a agirem como contadores . Quando i chega ao valor 7, o que indica a conclusão de um ciclo de 350ms, o led verde alterna de estado e este inteiro zera (para reiniciar a contagem), e quando j chega ao valor 20, o que indica a conclusão de um ciclo de 1000ms, o led azul alterna de estado e este inteiro também zera. Desse modo, os dois leds tem ciclos independentes de tempos diferentes, um de 350ms e outro de 1000ms.
+
+Resultados esperados: O led da placa varia entre as cores turquesa, azul, verde e apagado, de forma que o led verde fica ligando e desligando a cada 350ms, o led azul fica ligando e desligando a cada 1 segundo e o led fica turquesa quando ambos os leds azul e verde estão ligados.
+
+Resultados obtidos: Foram coerentes com o programado
+
+*Obs: Um fato curioso que notamos na realização do desafio é que não foi intuitivo trabalhar com os dois leds com ciclos paralelos em uma programação baremetal, uma vez que não era possível ordenar um looping com delays como no primeiro exercício, já que os dois ciclos não tinham muitos pontos de encontro comuns. Para contornar esse problema foi necessário o estabelecimento de um sistema de contagem a partir de variáveis inteiras.
+
+
