@@ -66,7 +66,7 @@ void main(void)
     printk("Main iniciou\n");
     
     while (1) {
-        k_msleep(500);
+        k_msleep(350);
         gpio_pin_toggle_dt(&led1);
     }
 }
