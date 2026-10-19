@@ -2,14 +2,9 @@
 #include <zephyr/device.h>
 #include <zephyr/drivers/gpio.h>
 
-#define SLEEP_TIME_MS 50
-
-
-// Define o LED usando Device Tree
 #define LED0_NODE DT_ALIAS(led0)
 #define LED1_NODE DT_ALIAS(led1)
 
-// Verifica se o LED está definido no Device Tree
 #if DT_NODE_HAS_STATUS(LED0_NODE, okay)
 static const struct gpio_dt_spec led0 = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 #else
@@ -22,9 +17,20 @@ static const struct gpio_dt_spec led1 = GPIO_DT_SPEC_GET(LED1_NODE, gpios);
 #error "Unsupported board: led0 devicetree alias is not defined"
 #endif
 
+void minha_thread(void)
+{
+    while (1) {
+        k_msleep(1000);
+        gpio_pin_toggle_dt(&led0);
+    }
+}
+
+// Criar a thread
+K_THREAD_DEFINE(minha_thread_id, 512, minha_thread, NULL, NULL, NULL, 7, 0, 0);
+
 void main(void)
 {
-    int ret0;
+     int ret0;
 
     // Verifica se o device está pronto
     if (!gpio_is_ready_dt(&led0)) {
@@ -57,22 +63,10 @@ void main(void)
     }
 
     printk("LED blinking on %s pin %d\n", led1.port->name, led1.pin);
-
-    int i = 0;
-    int j = 0;
-
+    printk("Main iniciou\n");
+    
     while (1) {
-        // Toggle do LED usando a nova API
-        i++;
-        j++;
-        k_msleep(SLEEP_TIME_MS);
-        if(i == 7) {
-            gpio_pin_toggle_dt(&led0);
-            i = 0;
-        }
-        if(j == 20) {
-            gpio_pin_toggle_dt(&led1);
-            j = 0;
-        }
+        k_msleep(500);
+        gpio_pin_toggle_dt(&led1);
     }
 }
