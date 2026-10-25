@@ -35,7 +35,7 @@ void thread_A(void *p1, void *p2, void *p3)
         endA_ms = k_uptime_get();
 
         printk("InicioA: %llu ms; FimA: %llu ms;  DiferençaA: %llu ms \n", startA_ms, endA_ms, endA_ms-startA_ms);
-        // k_msleep(TEMPO_A_MS);       // Dorme — libera CPU
+        k_msleep(TEMPO_A_MS);       // Dorme — libera CPU
 
 
     }
@@ -62,7 +62,7 @@ void thread_B(void *p1, void *p2, void *p3)
         gpio_pin_set_dt(&ledB, 0);  // Desliga LED vermelho
         endB_ms = k_uptime_get();
         printk("InicioB: %llu ms; FimB: %llu ms;  DiferençaB: %llu ms\n", startB_ms, endB_ms, endB_ms - startB_ms);
-        k_msleep(TEMPO_B_MS);       // Dorme um pouco
+        //k_msleep(TEMPO_B_MS);       // Dorme um pouco
     }
 }
 
