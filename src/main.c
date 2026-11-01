@@ -62,7 +62,7 @@ void thread_2(void *a, void *b, void *c)
     k_sem_take(&sem_escrita, K_FOREVER);
 
     /* Escreve o valor incrementado */
-    contador = valor + 1;
+    contador = valor +1;
 
     printk("Thread 2 escreveu: %d\n", contador);
 }
