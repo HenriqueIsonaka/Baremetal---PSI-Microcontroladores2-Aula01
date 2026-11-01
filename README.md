@@ -1,13 +1,12 @@
 Nome : Henrique Makoto Isonaka
 NUSP: 17972455
 
-Link github (Esta atividade está no branch RaceCondition): https://github.com/HenriqueIsonaka/Baremetal---PSI-Microcontroladores2-Aula01/tree/RaceCondition 
 
 - IA utilizada: Chat GPT
 
-- Primeiro prompt utilizado: Crie um código para o Zephyr RTOS, com utilização do microcontrolador frdm_kl25z que expõe o problema de sincronismo de utilização de recursos compartilhados que leva a condição de corrida (Race condition) - Não resultou em um código que exemplifica uma Race Condition.
+- Primeiro prompt utilizado: "Crie um código para o Zephyr RTOS, com utilização do microcontrolador frdm_kl25z que expõe o problema de sincronismo de utilização de recursos compartilhados que leva a condição de corrida (Race condition)" - Não resultou em um código que exemplifica uma Race Condition.
 
-- Segundo prompt utilizado: O resultado do printk não resulta em race condition  - Sucesso: resultou em um código que gera uma condição de race condition
+- Segundo prompt utilizado: "O resultado do printk não resulta em race condition"  - Sucesso: resultou em um código que gera uma condição de race condition.
 
 - Descrição do código realizado: O código cria uma variável global (chamada de “contador”) e duas threads de mesma prioridade. Estas duas threads têm a função de ler o valor do contador e atribuí-lo em uma variável, imprimir esse valor,  e atribuir esse valor somado a um ao contador. Em resumo, ambas seriam visadas para somar +1 ao valor do contador. Essas threads estão sincronizadas por um semáforo que força elas a serem executadas ao mesmo tempo. Por fim, o código imprime o valor final atribuído à variável global e o seu valor esperado, que é 2, pelo fato de ambas as threads terem sido executadas uma vez.
 
